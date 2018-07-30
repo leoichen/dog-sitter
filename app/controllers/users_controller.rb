@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.save
 
-    redirect_to :root
+    redirect_to root_path
   end
 
   def edit
@@ -24,13 +24,13 @@ class UsersController < ApplicationController
   def update
     @user.update(user_params)
 
-    redirect_to :root
+    redirect_to root_path
   end
 
   def destroy
     @user.destroy
 
-    redirect_to :root
+    redirect_to root_path
   end
 
   private
