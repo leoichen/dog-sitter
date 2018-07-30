@@ -1,0 +1,13 @@
+class User < ApplicationRecord
+  has_many :services, dependent: :destroy
+  has_many :dogs, dependent: :destroy
+
+  validates :first_name, presence: true, uniqueness: {scope: :last_name}
+  vaildates :last_name, :gender, :bio, :age, :language, :phone_number, :price, presence: true
+  validates :phone_number, uniqueness: true, length: {is: 11}
+  validates :gender, inclusion: {in %w(male female other)}
+  validates :bio, length: { maximum: 1000,
+    too_long: "%{count} characters is the maximum allowed" }
+  validates :age, numericality: {only_integer: true}
+  validates :price, numericality: {only_integer: true}
+end
