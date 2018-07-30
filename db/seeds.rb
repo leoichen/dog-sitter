@@ -1,4 +1,6 @@
 # For users model
+User.destroy_all
+
 10.times do
   User.create(first_name:,
               last_name:,
@@ -16,10 +18,9 @@ end
 User.all each do |user|
   Service.create(
   )
+end
 
-
-  # For bookings
-  10.times do
-    Booking.create(start_date:
-                   end_date:
-                   )
+# For bookings
+User.all each do |user|
+  Dog.create(
+  )
