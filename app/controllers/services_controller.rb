@@ -1,5 +1,6 @@
 class ServicesController < ApplicationController
-  before_action :set_service, only: [ :show, :edit, :update, :destroy]
+  before_action :set_user
+  before_action :set_service, only: [ :show, :update, :destroy]
   def index
     @services = Service.all
   end
@@ -7,24 +8,17 @@ class ServicesController < ApplicationController
   def show
   end
 
-  def new
-    @service = Service.new
-  end
 
   def create
+
     @service = Service.new(service_params)
     @service.save
 
-    redirect_to :root
   end
 
-  def edit
-  end
 
   def update
     @service.update(service_params)
-
-    redirect_to :root
   end
 
   def destroy
@@ -34,6 +28,10 @@ class ServicesController < ApplicationController
   end
 
   private
+  def set_user
+    @user = User.find(params[:id])
+  end
+
   def set_service
     @service = Service.find(params[:id])
   end
