@@ -1,18 +1,28 @@
 class Api::V1::DogsController < Api::V1::BaseController
 
+  def index
+    @dogs = Dog.all
+  end
+
   def show
     @dog = Dog.find(params[:id])
   end
 
   def new
     @dog = Dog.new
-    @user = User.find(params[:user_id])
+    # @user = User.find(params[:user_id])
   end
 
   def create
-    @user = User.find(params[:user_id])
+    # @user = User.find(params[:user_id])
     @dog = Dog.new(dog_params)
-    @dog.user = @user
+    @dog.user = User.all.sample
+
+    if @dog.save
+      # render :show, status: :created
+    else
+      render_error
+    end
   end
 
   def edit
@@ -36,6 +46,13 @@ class Api::V1::DogsController < Api::V1::BaseController
     params.require(:dog).permit(:breed, :name, :gender, :age, :medical_history)
   end
 
+  def render_error
+
+  render json: { errors: @restaurant.errors.full_messages },
+
+    status: :unprocessable_entity
+
+end
 
 
 end
