@@ -1,5 +1,7 @@
 class Api::V1::BaseController < ActionController::Base
 
+  skip_before_action :verify_authenticity_token
+
   rescue_from StandardError,                with: :internal_server_error
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 

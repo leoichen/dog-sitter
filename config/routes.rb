@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  post '/login', to: 'login#login'
+
   root to: 'pages#home'
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       end
       resources :dogs
       resources :bookings, only: [ :destroy ]
+      post '/login', to: 'login#login'
     end
   end
 end
