@@ -1,4 +1,4 @@
-class ReviewsController < ApplicationController
+class Api::V1::ReviewsController < Api::V1::BaseController
   def show
     @review = Review.find(params[:id])
   end
