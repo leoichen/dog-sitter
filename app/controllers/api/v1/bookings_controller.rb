@@ -1,5 +1,11 @@
 class Api::V1::BookingsController < Api::V1::BaseController
+  def index
+    @service = Service.find(params[:service_id])
+    @bookings = @service.bookings
+  end
+
   def show
+    @service = Service.find(params[:service_id])
     @booking = Booking.find(params[:id])
   end
 
@@ -22,9 +28,4 @@ class Api::V1::BookingsController < Api::V1::BaseController
   def booking_params
     params.require(:booking).permit(:start_date,:end_date)
   end
-
-
-
-
-
 end
