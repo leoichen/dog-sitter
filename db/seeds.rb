@@ -40,7 +40,13 @@ end
 puts "Create #{Dog.count} dogs!"
 
 # For bookings
-
+Service.all.each do |service|
+  Booking.create(service: service,
+                 dog: Dog.all.sample,
+                 start_date: Faker::Date.forward(23),
+                 end_date: Faker::Date.forward(23),
+                 )
+end
 
 puts "Create #{Booking.count} bookings!"
 
