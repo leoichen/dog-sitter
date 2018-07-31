@@ -12,6 +12,7 @@ class ServicesController < ApplicationController
   def create
 
     @service = Service.new(service_params)
+    @service.user = @user
     @service.save
 
   end
