@@ -1,4 +1,4 @@
-class DogsController < ApplicationController
+class Api::V1::DogsController < Api::V1::BaseController
 
   def show
     @dog = Dog.find(params[:id])
