@@ -1,0 +1,1 @@
+json.bookings @bookings
