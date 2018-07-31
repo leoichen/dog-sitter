@@ -14,7 +14,7 @@ class ReviewsController < ApplicationController
     @@review.booking = @booking
   end
 
-  def dog_params
+  def review_params
     params.require(:review).permit(:content, :rating)
   end
 end
