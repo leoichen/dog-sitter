@@ -1,5 +1,6 @@
 class Api::V1::ServicesController < Api::V1::BaseController
-  before_action :set_service, only: [ :show, :edit, :update, :destroy]
+  before_action :set_service, only: [:show, :edit, :update, :destroy]
+
   def index
     @services = Service.all
   end
@@ -7,30 +8,26 @@ class Api::V1::ServicesController < Api::V1::BaseController
   def show
   end
 
-  def new
-    @service = Service.new
-  end
-
   def create
     @service = Service.new(service_params)
-    @service.save
-
-    redirect_to :root
-  end
-
-  def edit
+    @service.user = User.all.sample
+    if @service.save
+      redirect_to root_path
+    else
+      render_error
+    end
   end
 
   def update
     @service.update(service_params)
 
-    redirect_to :root
+    redirect_to root_path
   end
 
   def destroy
     @service.destroy
 
-    redirect_to :root
+    redirect_to root_path
   end
 
   private
@@ -40,5 +37,10 @@ class Api::V1::ServicesController < Api::V1::BaseController
 
   def service_params
     params.require(:service).permit(:categories, :duration)
+  end
+
+  def render_error
+    render json: { errors: @restaurant.errors.full_messages },
+    status: :unprocessable_entity
   end
 end
