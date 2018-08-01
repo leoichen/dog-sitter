@@ -18,10 +18,11 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def update
-   if @user.update(user_params)
-    redirect_to root_path
-  else
-    render_ereror
+    if @user.update(user_params)
+      redirect_to root_path
+    else
+      render_error
+    end
   end
 
   def destroy
@@ -38,11 +39,11 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :address, :bio, :gender, :age, :language, :phone_number, :price)
+    params.require(:user).permit(:first_name, :last_name, :address, :bio, :gender, :age, :language, :phone_number, :price, :image_url)
   end
 
   def render_error
     render json: { errors: @restaurant.errors.full_messages },
-    status: :unprocessable_entity
+      status: :unprocessable_entity
   end
 end

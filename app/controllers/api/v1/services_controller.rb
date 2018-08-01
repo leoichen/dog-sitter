@@ -10,7 +10,7 @@ class Api::V1::ServicesController < Api::V1::BaseController
 
   def create
     @service = Service.new(service_params)
-    @service.user = User.all.sample
+    @service.user = User.all.sample # how to link user?
     if @service.save
       redirect_to root_path
     else
