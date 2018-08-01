@@ -46,7 +46,7 @@ class Api::V1::DogsController < Api::V1::BaseController
   end
 
   def dog_params
-    params.require(:dog).permit(:breed, :name, :gender, :age, :medical_history)
+    params.require(:dog).permit(:breed, :name, :gender, :age, :medical_history, :image_url)
   end
 
   def render_error
