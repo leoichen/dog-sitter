@@ -2,7 +2,7 @@ class Api::V1::ServicesController < Api::V1::BaseController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
 
   def index
-    @services = Service.all
+    @services = Service.where(categories: params[:categories])
   end
 
   def show
@@ -12,7 +12,7 @@ class Api::V1::ServicesController < Api::V1::BaseController
     @service = Service.new(service_params)
     @service.user = User.all.sample
     if @service.save
-      redirect_to root_path
+      render :show
     else
       render_error
     end
@@ -41,6 +41,6 @@ class Api::V1::ServicesController < Api::V1::BaseController
 
   def render_error
     render json: { errors: @restaurant.errors.full_messages },
-    status: :unprocessable_entity
+      status: :unprocessable_entity
   end
 end

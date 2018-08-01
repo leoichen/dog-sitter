@@ -2,7 +2,11 @@ class Api::V1::UsersController < Api::V1::BaseController
   before_action :set_user, only: [ :show, :update, :destroy]
 
   def index
-    @users = User.all
+    if params[:query].present?
+      @users = User.joins(:services).where("services.categories LIKE ?", params[:query])
+    else
+      @users = User.all
+    end
   end
 
   def show
@@ -18,10 +22,11 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def update
-   if @user.update(user_params)
-    redirect_to root_path
-  else
-    render_ereror
+    if @user.update(user_params)
+      redirect_to root_path
+    else
+      render_error
+    end
   end
 
   def destroy
@@ -43,6 +48,6 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def render_error
     render json: { errors: @restaurant.errors.full_messages },
-    status: :unprocessable_entity
+      status: :unprocessable_entity
   end
 end
