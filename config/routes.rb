@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       end
       resources :dogs
       resources :bookings, only: [ :destroy ]
+      get '/login', to: 'login#login'
       post '/login', to: 'login#login'
     end
   end
