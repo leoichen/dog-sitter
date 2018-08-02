@@ -13,6 +13,8 @@ json.dog do
   json.user_bio @dog.user.bio
   json.user_language @dog.user.language
   json.user_image_url @dog.user.image_url
+  json.user_phone_number @dog.user.phone_number
+  json.user_price @dog.user.price
 
   json.bookings @dog.bookings do |booking|
     json.start_date booking.start_date.strftime("%A, %b, %d")

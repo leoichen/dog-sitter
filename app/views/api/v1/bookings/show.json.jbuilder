@@ -24,6 +24,8 @@ json.booking do
   json.sitter_first_name @booking.service.user.first_name
   json.dog_sitter_last_name @booking.service.user.last_name
   json.dog_sitter_image_url @booking.service.user.image_url
+  json.sitter_phone_number @booking.service.user.phone_number
+  json.sitter_price @booking.service.user.price
 
   json.reviews @booking.reviews do |review|
     json.content review.content

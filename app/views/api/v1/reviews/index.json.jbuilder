@@ -12,4 +12,6 @@ json.reviews @reviews do |review|
   json.sitter_first_name review.booking.service.user.first_name
   json.sitter_last_name review.booking.service.user.last_name
   json.sitter_image_url review.booking.service.user.image_url
+  json.sitter_phone_number review.booking.service.user.phone_number
+  json.sitter_price review.booking.service.user.price
 end
