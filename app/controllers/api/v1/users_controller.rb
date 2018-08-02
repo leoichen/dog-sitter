@@ -1,5 +1,5 @@
 class Api::V1::UsersController < Api::V1::BaseController
-  before_action :set_user, only: [ :show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy]
 
   def index
     if params[:query].present?
@@ -38,6 +38,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   private
+
   def set_user
     @user = User.find(params[:id])
   end
@@ -47,7 +48,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def render_error
-    render json: { errors: @restaurant.errors.full_messages },
+    render json: { errors: @user.errors.full_messages },
       status: :unprocessable_entity
   end
 end

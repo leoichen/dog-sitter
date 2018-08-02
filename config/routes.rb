@@ -5,12 +5,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users
       resources :services do
-        resources :bookings, only: [ :index, :show, :update, :create ] do
-          resources :review, only: [ :index ]
+        resources :bookings, shallow: true do
+          resources :reviews, shallow: true
         end
       end
       resources :dogs
-      resources :bookings, only: [ :destroy ]
       get '/login', to: 'login#login'
       post '/login', to: 'login#login'
     end

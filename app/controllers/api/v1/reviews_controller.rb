@@ -3,9 +3,8 @@
 class Api::V1::ReviewsController < Api::V1::BaseController
 
   def index
-    # @booking = Booking.find(params[:booking_id])
-    # @reviews = @booking.reviews
-    @reviews = Review.all
+    @booking = Booking.find(params[:booking_id])
+    @reviews = @booking.reviews
   end
 
   def show
@@ -13,10 +12,7 @@ class Api::V1::ReviewsController < Api::V1::BaseController
   end
 
   def create
-    @booking = Booking.find(params[:booking_id])
     @review = Review.new(review_params)
-    @review.booking = @booking
-
     if @review.save
       redirect_to root_path
     else
@@ -36,11 +32,11 @@ class Api::V1::ReviewsController < Api::V1::BaseController
   private
 
   def review_params
-    params.require(:review).permit(:content, :rating)
+    params.require(:review).permit(:content, :rating, :booking_id)
   end
 
   def render_error
     render json: { errors: @restaurant.errors.full_messages },
-    status: :unprocessable_entity
+      status: :unprocessable_entity
   end
 end
