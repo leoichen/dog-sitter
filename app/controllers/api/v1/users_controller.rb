@@ -10,14 +10,20 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def show
+    @users = User.where.not(latitude: nil, longitude: nil)
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      render :show
+    if User.all.any? {|user| user.first_name == params[:user][:first_name]}
+      @user = User.find_by(first_name: params[:user][:first_name])
+      redirect_to api_v1_user_path(@user)
     else
-      render_error
+      @user = User.new(user_params)
+      if @user.save
+        render :show
+      else
+        render_error
+      end
     end
   end
 
@@ -44,7 +50,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :address, :bio, :gender, :age, :language, :phone_number, :price, :image_url)
+    params.require(:user).permit(:first_name, :last_name, :address, :bio, :gender, :age, :language, :phone_number, :price, :image_url, :latitude, :longitude)
   end
 
   def render_error

@@ -11,6 +11,8 @@ json.users @users do |user|
   json.image_url user.image_url
   json.phone_number user.phone_number
   json.price user.price
+  json.latitude user.latitude
+  json.longitude user.longitude
 
   json.dogs user.dogs do |dog|
     json.breed dog.breed
