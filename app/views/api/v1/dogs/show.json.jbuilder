@@ -4,6 +4,7 @@ json.dog do
   json.gender @dog.gender
   json.age @dog.age
   json.medical_history @dog.medical_history
+  json.image_url @dog.image_url
 
   json.user_id @dog.user.id
   json.user_first_name @dog.user.first_name
