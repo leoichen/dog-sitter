@@ -17,6 +17,7 @@ gem 'uglifier'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem 'rest-client'
 gem 'dotenv-rails', groups: [:development, :test]
+gem "geocoder"
 
 group :development do
   gem 'web-console', '>= 3.3.0'
