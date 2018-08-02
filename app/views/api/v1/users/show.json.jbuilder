@@ -7,6 +7,8 @@ json.user do
   json.bio @user.bio
   json.language @user.language
   json.image_url @user.image_url
+  json.phone_number @user.phone_number
+  json.price @user.price
   json.latitude @user.latitude
   json.longitude @user.longitude
 

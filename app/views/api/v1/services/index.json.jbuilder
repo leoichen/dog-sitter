@@ -11,6 +11,8 @@ json.services @services do |service|
   json.user_bio service.user.bio
   json.user_language service.user.language
   json.user_image_url service.user.image_url
+  json.user_phone_number service.user.phone_number
+  json.user_price service.user.price
 
   json.bookings service.bookings do |booking|
     json.start_date booking.start_date.strftime("%A, %b, %d")
