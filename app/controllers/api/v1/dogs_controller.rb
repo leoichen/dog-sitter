@@ -11,7 +11,10 @@ class Api::V1::DogsController < Api::V1::BaseController
   end
 
   def create
+    # byebug
+    @user = User.find(params[:user_id])
     @dog = Dog.new(dog_params)
+    @dog.user = @user
 
     if @dog.save
       render :show, status: :created

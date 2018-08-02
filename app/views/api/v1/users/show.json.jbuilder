@@ -14,6 +14,7 @@ json.user do
     json.gender dog.gender
     json.age dog.age
     json.medical_history dog.medical_history
+    json.image_url dog.image_url
   end
 
   json.services @user.services do |service|
