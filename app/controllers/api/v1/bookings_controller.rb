@@ -15,7 +15,18 @@ class Api::V1::BookingsController < Api::V1::BaseController
     if @booking.save
       render :show
     else
-      render_error
+      render json: { errors: @booking.errors.full_messages },
+        status: :unprocessable_entity
+    end
+  end
+
+  def update
+    @booking = Booking.find(params[:id])
+    if @booking.update(booking_params)
+      render :show
+    else
+      render json: { errors: @booking.errors.full_messages },
+        status: :unprocessable_entity
     end
   end
 
@@ -24,7 +35,8 @@ class Api::V1::BookingsController < Api::V1::BaseController
     if @booking.destroy
       render :index
     else
-      render_error
+      render json: { errors: @booking.errors.full_messages },
+        status: :unprocessable_entity
     end
   end
 

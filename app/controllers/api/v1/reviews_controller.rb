@@ -16,7 +16,8 @@ class Api::V1::ReviewsController < Api::V1::BaseController
     if @review.save
       redirect_to root_path
     else
-      render_error
+      render json: { errors: @review.errors.full_messages },
+        status: :unprocessable_entity
     end
   end
 
@@ -25,7 +26,8 @@ class Api::V1::ReviewsController < Api::V1::BaseController
     if @review.destroy
       redirect_to root_path
     else
-      render_error
+      render json: { errors: @review.errors.full_messages },
+        status: :unprocessable_entity
     end
   end
 
@@ -37,6 +39,6 @@ class Api::V1::ReviewsController < Api::V1::BaseController
 
   def render_error
     render json: { errors: @review.errors.full_messages },
-    status: :unprocessable_entity
+      status: :unprocessable_entity
   end
 end
