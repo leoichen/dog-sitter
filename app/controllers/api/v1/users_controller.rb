@@ -22,8 +22,6 @@ class Api::V1::UsersController < Api::V1::BaseController
       if @user.save
         render :show
       else
-        # render_error
-
         render json: { errors: @user.errors.full_messages },
           status: :unprocessable_entity
       end
@@ -32,9 +30,10 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def update
     if @user.update(user_params)
-      redirect_to root_path
+      render :show
     else
-      render_error
+      render json: { errors: @user.errors.full_messages },
+        status: :unprocessable_entity
     end
   end
 
@@ -42,7 +41,8 @@ class Api::V1::UsersController < Api::V1::BaseController
     if @user.destroy
       redirect_to root_path
     else
-      render_error
+      render json: { errors: @user.errors.full_messages },
+        status: :unprocessable_entity
     end
   end
 
@@ -54,10 +54,5 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :address, :bio, :gender, :age, :language, :phone_number, :price, :image_url, :latitude, :longitude)
-  end
-
-  def render_error
-    render json: { errors: @user.errors.full_messages },
-      status: :unprocessable_entity
   end
 end

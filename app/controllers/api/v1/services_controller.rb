@@ -21,7 +21,8 @@ class Api::V1::ServicesController < Api::V1::BaseController
     if @service.update(service_params)
       render :show
     else
-      render_error
+      render json: { errors: @service.errors.full_messages },
+        status: :unprocessable_entity
     end
   end
 

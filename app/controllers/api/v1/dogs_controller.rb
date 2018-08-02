@@ -16,7 +16,8 @@ class Api::V1::DogsController < Api::V1::BaseController
     if @dog.save
       render :show, status: :created
     else
-      render_error
+      render json: { errors: @dog.errors.full_messages },
+        status: :unprocessable_entity
     end
   end
 
@@ -24,7 +25,8 @@ class Api::V1::DogsController < Api::V1::BaseController
     if @dog.update(dog_params)
       render :show
     else
-      render_error
+      render json: { errors: @dog.errors.full_messages },
+        status: :unprocessable_entity
     end
   end
 
@@ -32,7 +34,8 @@ class Api::V1::DogsController < Api::V1::BaseController
     if @dog.destroy
       render :index
     else
-      render_error
+      render json: { errors: @dog.errors.full_messages },
+        status: :unprocessable_entity
     end
   end
 
