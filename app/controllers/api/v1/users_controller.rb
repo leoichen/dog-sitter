@@ -47,7 +47,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def render_error
-    render json: { errors: @restaurant.errors.full_messages },
+    render json: { errors: @user.errors.full_messages },
       status: :unprocessable_entity
   end
 end
