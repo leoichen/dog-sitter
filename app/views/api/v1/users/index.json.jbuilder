@@ -9,6 +9,8 @@ json.users @users do |user|
   json.bio user.bio
   json.language user.language
   json.image_url user.image_url
+  json.latitude user.latitude
+  json.longitude user.longitude
 
   json.dogs user.dogs do |dog|
     json.breed dog.breed

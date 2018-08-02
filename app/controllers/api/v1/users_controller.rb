@@ -10,6 +10,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def show
+    @users = User.where.not(latitude: nil, longitude: nil)
   end
 
   def create
@@ -44,7 +45,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :address, :bio, :gender, :age, :language, :phone_number, :price, :image_url)
+    params.require(:user).permit(:first_name, :last_name, :address, :bio, :gender, :age, :language, :phone_number, :price, :image_url, :latitude, :longitude)
   end
 
   def render_error
