@@ -2,7 +2,7 @@ class Api::V1::ServicesController < Api::V1::BaseController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
 
   def index
-    @services = Service.where(categories: params[:categories])
+    @services = Service.all
   end
 
   def show
@@ -10,7 +10,6 @@ class Api::V1::ServicesController < Api::V1::BaseController
 
   def create
     @service = Service.new(service_params)
-    @service.user = User.all.sample # how to link user?
     if @service.save
       render :show
     else
@@ -19,9 +18,11 @@ class Api::V1::ServicesController < Api::V1::BaseController
   end
 
   def update
-    @service.update(service_params)
-
-    redirect_to root_path
+    if @service.update(service_params)
+      render :show
+    else
+      render_error
+    end
   end
 
   def destroy
@@ -31,16 +32,17 @@ class Api::V1::ServicesController < Api::V1::BaseController
   end
 
   private
+
   def set_service
     @service = Service.find(params[:id])
   end
 
   def service_params
-    params.require(:service).permit(:categories, :duration)
+    params.require(:service).permit(:categories, :duration, :user_id)
   end
 
   def render_error
-    render json: { errors: @restaurant.errors.full_messages },
+    render json: { errors: @service.errors.full_messages },
       status: :unprocessable_entity
   end
 end
