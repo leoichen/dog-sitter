@@ -22,6 +22,7 @@ json.user do
   end
 
   json.services @user.services do |service|
+    json.id service.id
     json.categories service.categories
     json.duration service.duration
     json.bookings service.bookings do |booking|
