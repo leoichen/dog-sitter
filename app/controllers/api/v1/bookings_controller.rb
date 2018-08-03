@@ -12,9 +12,9 @@ class Api::V1::BookingsController < Api::V1::BaseController
 
   def create
     @booking = Booking.new(booking_params)
+    # byebug
     @booking.service_id = params[:service_id]
     @booking.dog_id = params[:dog_id]
-    @booking.user_id = params[:user_id]
     if @booking.save
       render :show
     else
