@@ -18,6 +18,7 @@ json.dog do
   json.user_price @dog.user.price
 
   json.bookings @dog.bookings do |booking|
+    json.id dog.id
     json.start_date booking.start_date.strftime("%A, %b, %d")
     json.end_date booking.end_date.strftime("%A, %b, %d")
     json.reviews booking.reviews do |review|
