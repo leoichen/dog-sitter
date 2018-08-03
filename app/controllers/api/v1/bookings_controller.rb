@@ -12,6 +12,9 @@ class Api::V1::BookingsController < Api::V1::BaseController
 
   def create
     @booking = Booking.new(booking_params)
+    @booking.service_id = params[:service_id]
+    @booking.dog_id = params[:dog_id]
+    @booking.user_id = params[:user_id]
     if @booking.save
       render :show
     else
@@ -43,6 +46,6 @@ class Api::V1::BookingsController < Api::V1::BaseController
   private
 
   def booking_params
-    params.require(:booking).permit(:start_date,:end_date, :service_id)
+    params.require(:booking).permit(:start_date, :end_date, :service_id)
   end
 end
