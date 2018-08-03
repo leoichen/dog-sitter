@@ -13,6 +13,7 @@ json.user do
   json.longitude @user.longitude
 
   json.dogs @user.dogs do |dog|
+    json.id dog.id
     json.breed dog.breed
     json.name dog.name
     json.gender dog.gender
